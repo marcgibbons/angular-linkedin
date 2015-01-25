@@ -1,0 +1,31 @@
+{
+  "name": "angular-linkedin",
+  "version": "1.0.0",
+  "description": "LinkedIn API wrapper for AngularJS",
+  "main": "index.js",
+  "scripts": {
+    "build": "minify src/angular-linkedin.js > ./dist/angular-linkedin.min.js && cp src/angular-linkedin.js dist/",
+    "examples": "http-server ./examples/ -o -a localhost"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marcgibbons/angular-linkedin.git"
+  },
+  "keywords": [
+    "LinkedIn",
+    "Javascript",
+    "API",
+    "Angular"
+  ],
+  "author": "Marc Gibbons",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marcgibbons/angular-linkedin/issues"
+  },
+  "homepage": "https://github.com/marcgibbons/angular-linkedin",
+  "devDependencies": {
+    "http-server": "^0.7.4",
+    "minify": "^1.4.8"
+  },
+  "dependencies": {}
+}

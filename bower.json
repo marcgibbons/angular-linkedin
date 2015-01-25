@@ -1,0 +1,31 @@
+{
+  "name": "angular-linkedin",
+  "version": "1.0.0",
+  "homepage": "https://github.com/marcgibbons/angular-linkedin",
+  "authors": [
+    "Marc Gibbons <marc_gibbons@rogers.com>"
+  ],
+  "description": "LinkedIn API wrapper for AngularJS",
+  "keywords": [
+    "LinkedIn",
+    "Javascript",
+    "API",
+    "Angular"
+  ],
+  "main": "dist/angular-linkedin.js",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.3.10"
+  },
+  "devDependencies": {
+    "ui-router": "~0.2.13"
+  }
+}
