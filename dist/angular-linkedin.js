@@ -1,4 +1,4 @@
-var IN;  // LinkedIn JSAPI Object
+var IN;  // Global LinkedIn JSAPI Object
 
 (function (angular) {
   'use strict';
@@ -11,8 +11,8 @@ var IN;  // LinkedIn JSAPI Object
   };
 
   angular.module('linkedin', [])
-    .value('settings', settings)
-    .value('IN', IN)
+    .value('LinkedInSettings', settings)
+
     .provider('LinkedIn', [function () {
       this.init = function (_settings) {
         if (typeof _settings !== 'object' || _settings.apiKey === undefined) {
@@ -24,24 +24,28 @@ var IN;  // LinkedIn JSAPI Object
         settings.authorize = _settings.authorize || settings.authorize;
         settings.lang = _settings.lang || settings.lang;
       };
+
       this.$get = [function () {
         return IN;
       }];
     }])
 
-    .run(['settings', function createLinkedInScriptTag(settings) {
-      var script = angular.element('<script>');
-      script.attr('type', 'text/javascript');
-      script.attr('src', 'http://platform.linkedin.com/in.js');
-
+    .run(['$window', 'LinkedInSettings', function ($window, LinkedInSettings) {
+      if (IN !== undefined) {
+        return;
+      }
       var settingsString = '';
-      angular.forEach(settings, function (value, key) {
+      angular.forEach(LinkedInSettings, function (value, key) {
         if (value !== undefined) {
           key = key === 'apiKey' ? 'api_key' : key;
           settingsString += key + ':  ' + value + '\n';
         }
       });
-      script.html(settingsString);
-      angular.element('script').append(script);
+
+      angular.element($window.document.getElementsByTagName('script')).append(
+        angular.element('<script>')
+        .attr('type', 'text/javascript')
+        .attr('src', 'http://platform.linkedin.com/in.js')
+        .html(settingsString));
     }]);
 })(angular);

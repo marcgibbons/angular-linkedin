@@ -31,6 +31,9 @@ var IN;  // Global LinkedIn JSAPI Object
     }])
 
     .run(['$window', 'LinkedInSettings', function ($window, LinkedInSettings) {
+      if (IN !== undefined) {
+        return;
+      }
       var settingsString = '';
       angular.forEach(LinkedInSettings, function (value, key) {
         if (value !== undefined) {
