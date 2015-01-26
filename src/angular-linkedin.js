@@ -31,9 +31,6 @@ var IN;  // Global LinkedIn JSAPI Object
     }])
 
     .run(['$window', 'LinkedInSettings', function ($window, LinkedInSettings) {
-      if (IN !== undefined) {
-        return;
-      }
       var settingsString = '';
       angular.forEach(LinkedInSettings, function (value, key) {
         if (value !== undefined) {
@@ -42,7 +39,7 @@ var IN;  // Global LinkedIn JSAPI Object
         }
       });
 
-      angular.element($window.document.getElementsByTagName('script')).append(
+      angular.element($window.document.getElementsByTagName('head')).append(
         angular.element('<script>')
         .attr('type', 'text/javascript')
         .attr('src', 'http://platform.linkedin.com/in.js')
