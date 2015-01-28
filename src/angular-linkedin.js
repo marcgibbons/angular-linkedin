@@ -31,6 +31,9 @@ var IN;  // Global LinkedIn JSAPI Object
     }])
 
     .run(['$window', 'LinkedInSettings', function ($window, LinkedInSettings) {
+      if ($('script[src="http://platform.linkedin.com/in.js"]').length) {
+        return;
+      }
       var settingsString = '';
       angular.forEach(LinkedInSettings, function (value, key) {
         if (value !== undefined) {
@@ -39,10 +42,11 @@ var IN;  // Global LinkedIn JSAPI Object
         }
       });
 
-      angular.element($window.document.getElementsByTagName('head')).append(
-        angular.element('<script>')
-        .attr('type', 'text/javascript')
-        .attr('src', 'http://platform.linkedin.com/in.js')
-        .html(settingsString));
+      var parent = $window.document.getElementsByTagName('script')[0];
+      var script = $window.document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = 'http://platform.linkedin.com/in.js';
+      script.innerHTML = settingsString;
+      parent.parentNode.insertBefore(script, parent);
     }]);
 })(angular);
